@@ -9,6 +9,7 @@ public class PatientChart {
     private String insurancecard;
     private String medicalhistory;
 
+
     public int getId() {
         return id;
     }
