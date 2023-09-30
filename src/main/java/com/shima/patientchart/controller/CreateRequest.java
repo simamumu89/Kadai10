@@ -1,4 +1,4 @@
-package com.shima.patientchart.entity;
+package com.shima.patientchart.controller;
 
 public class CreateRequest {//Postmanからrequestを受け取るコード
 

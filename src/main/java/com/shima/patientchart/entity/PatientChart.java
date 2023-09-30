@@ -1,5 +1,7 @@
 package com.shima.patientchart.entity;
 
+import com.shima.patientchart.service.PatientChartService;
+
 public class PatientChart {
 
     private int id;
@@ -8,6 +10,9 @@ public class PatientChart {
     private String address;
     private String insurancecard;
     private String medicalhistory;
+
+    public static PatientChartService get() {
+    }
 
 
     public int getId() {

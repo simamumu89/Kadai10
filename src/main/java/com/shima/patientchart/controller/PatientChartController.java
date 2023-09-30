@@ -1,8 +1,6 @@
 package com.shima.patientchart.controller;
 
-import com.shima.patientchart.entity.CreateRequest;
 import com.shima.patientchart.entity.PatientChart;
-import com.shima.patientchart.entity.UpdateRequest;
 import com.shima.patientchart.service.PatientChartService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +23,11 @@ public class PatientChartController {
         List<PatientChart> patientcharts = patientchartService.getPatientChart();
         return patientcharts;
     }//Get 取得処理
+
+    @GetMapping("/patientcharts/{id}")
+    public PatientChart getPatientChart(@PathVariable("id") int id){
+        return patientchartService.findPatientChart(id);
+}
 
     @PostMapping("/patientcharts")
     public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder){
