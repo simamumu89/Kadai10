@@ -1,5 +1,9 @@
-package com.shima.patientchart;
+package com.shima.patientchart.controller;
 
+import com.shima.patientchart.entity.CreateRequest;
+import com.shima.patientchart.entity.PatientChart;
+import com.shima.patientchart.entity.UpdateRequest;
+import com.shima.patientchart.service.PatientChartService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,7 +29,7 @@ public class PatientChartController {
     @PostMapping("/patientcharts")
     public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder){
         URI uri = uriComponentsBuilder.path("/patientcharts/{id}").buildAndExpand(1).toUri();
-        return ResponseEntity.created(uri).body(new CreateResponse("create a new name"));
+        return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
     }//Postmanからrequestを受け取る
 
     @PatchMapping("/patientcharts/{id}")
@@ -33,9 +37,10 @@ public class PatientChartController {
         //Postmanから更新を処理する
         return new UpdateResponse("a name is updated!");
     }
+
     @DeleteMapping("/patientcharts/{id}")
-    public DeleteRequest deleteName(@PathVariable int id){
+    public DeleteResponse deleteName(@PathVariable int id){
         //更新データの削除処理
-        return new DeleteRequest("a name is removed!");
+        return new DeleteResponse("a name is removed!");
     }
 }

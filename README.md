@@ -23,12 +23,12 @@ curl --location 'http://localhost:8080/patientcharts'
 curl --location 'http://localhost:8080/patientcharts' \
 --header 'Content-Type: application/json' \
 --data '{
-"address": "福岡",
-"insurancecard": "共済",
+"address": "北海道",
+"insurancecard": "国保",
 "medicalhistory": "ストレートネック"
 }'
 
-![9AB246FC-5AEC-482D-A71D-CBDF121BEDD8_1_105_c.jpeg](..%2F..%2FPictures%2F%E5%86%99%E7%9C%9F%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA.photoslibrary%2Fresources%2Fderivatives%2F9%2F9AB246FC-5AEC-482D-A71D-CBDF121BEDD8_1_105_c.jpeg)
+![04FCC644-63E1-4CB3-B516-27AAE5B6A487.jpeg](..%2F..%2FPictures%2F%E5%86%99%E7%9C%9F%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA.photoslibrary%2Foriginals%2F0%2F04FCC644-63E1-4CB3-B516-27AAE5B6A487.jpeg)
 
 
 ## PATCH リクエスト
@@ -36,13 +36,13 @@ curl --location 'http://localhost:8080/patientcharts' \
 curl --location --request PATCH 'http://localhost:8080/patientcharts/1' \
 --header 'Content-Type: application/json' \
 --data '{
-"address": "北海道",
-"insurancecard": "国保",
+"address": "千葉",
+"insurancecard": "共済",
 "medicalhistory": "腰痛"
 }'
 
 
-![CD252F80-7C32-4B9D-B705-B60C712CB7DB_1_105_c.jpeg](..%2F..%2FPictures%2F%E5%86%99%E7%9C%9F%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA.photoslibrary%2Fresources%2Fderivatives%2FC%2FCD252F80-7C32-4B9D-B705-B60C712CB7DB_1_105_c.jpeg)
+![CAD74102-2630-40BE-BCB8-925BAE2E3DAF.jpeg](..%2F..%2FPictures%2F%E5%86%99%E7%9C%9F%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA.photoslibrary%2Foriginals%2FC%2FCAD74102-2630-40BE-BCB8-925BAE2E3DAF.jpeg)
 
 
 ## DELETE リクエスト
@@ -50,11 +50,11 @@ curl --location --request PATCH 'http://localhost:8080/patientcharts/1' \
 curl --location --request DELETE 'http://localhost:8080/patientcharts/1' \
 --header 'Content-Type: application/json' \
 --data '{
-"medicalhistory": "心臓病"
+"medicalhistory": "腰痛"
 }'
 
 
-![1C7C665E-F70B-48C7-9BA7-F750426FDC7F.jpeg](..%2F..%2FPictures%2F%E5%86%99%E7%9C%9F%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA.photoslibrary%2Foriginals%2F1%2F1C7C665E-F70B-48C7-9BA7-F750426FDC7F.jpeg)
+![6ADE0698-1752-411C-B8B7-17DFD85D024A.jpeg](..%2F..%2FPictures%2F%E5%86%99%E7%9C%9F%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA.photoslibrary%2Foriginals%2F6%2F6ADE0698-1752-411C-B8B7-17DFD85D024A.jpeg)
 
 
 

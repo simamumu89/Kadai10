@@ -1,5 +1,7 @@
-package com.shima.patientchart;
+package com.shima.patientchart.service;
 
+import com.shima.patientchart.entity.PatientChart;
+import com.shima.patientchart.mapper.PatientChartMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

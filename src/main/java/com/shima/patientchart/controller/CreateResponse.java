@@ -1,9 +1,10 @@
-package com.shima.patientchart;
+package com.shima.patientchart.controller;
 
-public class DeleteRequest {
+public class CreateResponse {
+
     private String message;
 
-    public DeleteRequest(String message) {
+    public CreateResponse(String message) {
         this.message = message;
     }
 

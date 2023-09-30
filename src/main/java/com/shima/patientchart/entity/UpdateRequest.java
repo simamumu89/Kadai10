@@ -1,25 +1,14 @@
-package com.shima.patientchart;
+package com.shima.patientchart.entity;
 
-public class PatientChart {
-
-    private int id;
-    private String name;
-    private String gender;
+public class UpdateRequest {
     private String address;
     private String insurancecard;
     private String medicalhistory;
 
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getGender() {
-        return gender;
+    public UpdateRequest(String address, String insurancecard, String medicalhistory) {
+        this.address = address;
+        this.insurancecard = insurancecard;
+        this.medicalhistory = medicalhistory;
     }
 
     public String getAddress() {

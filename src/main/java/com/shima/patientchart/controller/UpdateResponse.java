@@ -1,4 +1,4 @@
-package com.shima.patientchart;
+package com.shima.patientchart.controller;
 
 public class UpdateResponse {
 
