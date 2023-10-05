@@ -11,9 +11,6 @@ public class PatientChart {
     private String insurancecard;
     private String medicalhistory;
 
-    public static PatientChartService get() {
-    }
-
 
     public int getId() {
         return id;

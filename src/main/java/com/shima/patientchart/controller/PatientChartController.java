@@ -19,30 +19,31 @@ public class PatientChartController {
     }
 
     @GetMapping("/patientcharts")
-    public List<PatientChart> getPatientChart(){
-        List<PatientChart> patientcharts = patientchartService.getPatientChart();
+    public List<PatientChart> getPatientChart() {
+        int id = 0;
+        List<PatientChart> patientcharts = patientchartService.findPatientChart(id);
         return patientcharts;
     }//Get 取得処理
 
     @GetMapping("/patientcharts/{id}")
-    public PatientChart getPatientChart(@PathVariable("id") int id){
-        return patientchartService.findPatientChart(id);
-}
+    public PatientChart getPatientChart(@PathVariable("id") int id) {
+        return (PatientChart) patientchartService.findPatientChart(id);//例外ハンドリング
+    }
 
     @PostMapping("/patientcharts")
-    public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
         URI uri = uriComponentsBuilder.path("/patientcharts/{id}").buildAndExpand(1).toUri();
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
     }//Postmanからrequestを受け取る
 
     @PatchMapping("/patientcharts/{id}")
-    public UpdateResponse updateName(@PathVariable int id, @RequestBody UpdateRequest updateRequest){
+    public UpdateResponse updateName(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {
         //Postmanから更新を処理する
         return new UpdateResponse("a name is updated!");
     }
 
     @DeleteMapping("/patientcharts/{id}")
-    public DeleteResponse deleteName(@PathVariable int id){
+    public DeleteResponse deleteName(@PathVariable int id) {
         //更新データの削除処理
         return new DeleteResponse("a name is removed!");
     }

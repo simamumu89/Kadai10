@@ -2,7 +2,6 @@ package com.shima.patientchart;
 
 import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.mapper.PatientChartMapper;
-import com.shima.patientchart.service.PatientChartService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,8 +13,9 @@ public class PatientChartServiceImpl {
     public PatientChartServiceImpl(PatientChartMapper patientChartMapper) {
         this.patientChartMapper = patientChartMapper;
     }
-    public PatientChartService findPatientChart(int id){
-        Optional<PatientChart> patientChartServiceImpl = this.patientChartMapper.findById(id);
-        return PatientChart.get();// このままだとユーザーが存在しないときにNoSuchElementExceptionになる
+
+    public PatientChart findPatientChart(int id) {
+        Optional<PatientChart> patientChart = this.patientChartMapper.findById(id);
+        return patientChart.get(); //このままだとユーザーが存在しないときにNoSuchElementExceptionになる
     }
 }
