@@ -13,26 +13,32 @@ public class PatientChart {
 
 
     public int getId() {
+
         return id;
     }
 
     public String getName() {
+
         return name;
     }
 
     public String getGender() {
+
         return gender;
     }
 
     public String getAddress() {
+
         return address;
     }
 
     public String getInsurancecard() {
+
         return insurancecard;
     }
 
     public String getMedicalhistory() {
+
         return medicalhistory;
     }
 }

@@ -9,16 +9,17 @@ import java.util.List;
 @Service
 public class PatientChartService {
 
-    private final PatientChartMapper patientchartMapper;
+    private PatientChartMapper patientchartMapper;
 
     public PatientChartService(PatientChartMapper patientchartMapper) {
 
         this.patientchartMapper = patientchartMapper;
     }
 
-    public List<PatientChart> findPatientChart(int id) {
-        List<PatientChart> patientcharts = patientchartMapper.findAll();
+    public List<PatientChart> findPatientChart(int id) {//患者チャート ID の検索
+        List<PatientChart> patientcharts = patientchartMapper.findAll();//患者チャートのリストを患者チャートマッパをすべてを見つける
 
-        return patientcharts;
+        return patientcharts;//患者カルテを返す
     }
+
 }

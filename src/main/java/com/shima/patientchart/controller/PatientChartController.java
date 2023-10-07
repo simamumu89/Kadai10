@@ -1,13 +1,18 @@
 package com.shima.patientchart.controller;
 
+import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.service.PatientChartService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PatientChartController {
@@ -16,6 +21,18 @@ public class PatientChartController {
 
     public PatientChartController(PatientChartService patientChartService) {
         this.patientchartService = patientChartService;
+    }
+
+    @ExceptionHandler(value = UserNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleUserNotFoundException(
+            UserNotFoundException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", ZonedDateTime.now().toString(),
+                "status", String.valueOf(HttpStatus.NOT_FOUND.value()),
+                "error", HttpStatus.NOT_FOUND.getReasonPhrase(),
+                "message", e.getMessage(),
+                "path", request.getRequestURI());
+        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/patientcharts")
