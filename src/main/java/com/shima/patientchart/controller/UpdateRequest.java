@@ -12,14 +12,16 @@ public class UpdateRequest {
     }
 
     public String getAddress() {
+
         return address;
     }
 
     public String getInsurancecard() {
+
         return insurancecard;
     }
 
-    public String getMedicalhistory() {
+    public String getMedicalhistory(){
         return medicalhistory;
     }
 }
