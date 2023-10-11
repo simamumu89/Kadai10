@@ -5,6 +5,7 @@ import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.mapper.PatientChartMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,8 +19,8 @@ public class PatientChartService {
         this.patientchartMapper = patientchartMapper;
     }
 
-    public Optional<PatientChart> findAllPatientChart(int id) {//患者チャート ID の検索
-        Optional<PatientChart> patientcharts = patientchartMapper.findById();//患者チャートのリストを患者チャートマッパをすべてを見つける
+    public List<PatientChart> findAllPatientChart() {//患者チャート ID の検索　　返り値の型
+        List<PatientChart> patientcharts = patientchartMapper.findAll();//患者チャートのリストを患者チャートマッパをすべてを見つける
 
         return patientcharts;//患者カルテを返All
     }

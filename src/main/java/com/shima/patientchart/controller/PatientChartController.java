@@ -36,9 +36,8 @@ public class PatientChartController {
     }
 
     @GetMapping("/patientcharts")
-    public List<PatientChart> getPatientChart() {
-        int id = 0;
-        List<PatientChart> patientcharts = patientchartService.findPatientChart(id);
+    public List<PatientChart> getAllPatientChart() {
+        List<PatientChart> patientcharts = patientchartService.findAllPatientChart();// Serviceの返り値を受け取る変数の型
         return patientcharts;
     }//Get 取得処理
 
