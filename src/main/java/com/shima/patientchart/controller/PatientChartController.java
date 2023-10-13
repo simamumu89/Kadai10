@@ -32,18 +32,17 @@ public class PatientChartController {
                 "error", HttpStatus.NOT_FOUND.getReasonPhrase(),
                 "message", e.getMessage(),
                 "path", request.getRequestURI());
-        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/patientcharts")
     public List<PatientChart> getAllPatientChart() {
-        List<PatientChart> patientcharts = patientchartService.findAllPatientChart();// Serviceの返り値を受け取る変数の型
-        return patientcharts;
+        return patientchartService.findAllPatientChart();// Serviceの返り値を受け取る変数の型
     }//Get 取得処理
 
     @GetMapping("/patientcharts/{id}")
-    public PatientChart getPatientChart(@PathVariable("id") int id) {
-        return (PatientChart) patientchartService.findPatientChart(id);//例外ハンドリング
+    public PatientChart getPatientChart(@PathVariable("id") int id) throws UserNotFoundException {
+        return patientchartService.findPatientChart(id);//例外ハンドリング
     }
 
     @PostMapping("/patientcharts")
