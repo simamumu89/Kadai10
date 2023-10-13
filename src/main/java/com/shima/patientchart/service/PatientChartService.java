@@ -12,11 +12,11 @@ import java.util.Optional;
 public class PatientChartService {
 
     private PatientChartMapper patientchartMapper;
-    private com.shima.patientchart.mapper.PatientChartMapper PatientChartMapper;
+    private PatientChartMapper PatientChartMapper;
 
-    public PatientChartService(PatientChartMapper patientchartMapper) {
-
+    public PatientChartService(com.shima.patientchart.mapper.PatientChartMapper patientchartMapper, com.shima.patientchart.mapper.PatientChartMapper patientChartMapper) {
         this.patientchartMapper = patientchartMapper;
+        PatientChartMapper = patientChartMapper;
     }
 
     public List<PatientChart> findAllPatientChart() {//患者チャート ID の検索　　返り値の型
