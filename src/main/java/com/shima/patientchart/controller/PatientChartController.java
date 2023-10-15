@@ -45,6 +45,12 @@ public class PatientChartController {
         return patientchartService.findPatientChart(id);//例外ハンドリング
     }
 
+    @GetMapping("patientcharts")
+    public List<PatientChart> getPatientChart(@RequestParam("id") int id){
+        List<PatientChart> patientCharts = patientchartService.findPatientChart();
+        return patientCharts;
+    }
+
     @PostMapping("/patientcharts")
     public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
         URI uri = uriComponentsBuilder.path("/patientcharts/{id}").buildAndExpand(1).toUri();

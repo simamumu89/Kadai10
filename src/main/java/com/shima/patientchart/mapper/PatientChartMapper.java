@@ -15,4 +15,7 @@ public interface PatientChartMapper {
 
     @Select("SELECT * FROM patientcharts WHERE id = #{id}")//患者カルテ選択からどこでID
     Optional<PatientChart> findById();
+
+    @Select("SELECT * FROM  patientcharts WHERE patient LIKE CONCAT('%', #{id}, '%') ")
+    List<PatientChart> findId();
 }
