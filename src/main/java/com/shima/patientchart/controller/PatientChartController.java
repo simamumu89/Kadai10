@@ -2,8 +2,11 @@ package com.shima.patientchart.controller;
 
 import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
+import com.shima.patientchart.mapper.PatientChartMapper;
 import com.shima.patientchart.service.PatientChartService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +16,10 @@ import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/PatientCharts")
 public class PatientChartController {
 
     private final PatientChartService patientchartService;
@@ -33,7 +38,7 @@ public class PatientChartController {
                 "message", e.getMessage(),
                 "path", request.getRequestURI());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
+    }//404エラーを返す
 
     @GetMapping("/patientcharts")
     public List<PatientChart> getAllPatientChart() {
@@ -45,10 +50,16 @@ public class PatientChartController {
         return patientchartService.findPatientChart(id);//例外ハンドリング
     }
 
-    @GetMapping("patientcharts")
-    public List<PatientChart> getPatientChart(@RequestParam("id") int id){
-        List<PatientChart> patientCharts = patientchartService.findPatientChart();
-        return patientCharts;
+    @Autowired
+    PatientChartMapper patientChartMapper;
+
+    @GetMapping("/{id}")
+    public CreateResponse findById(@PathVariable int id){
+        Optional<PatientChart> patientChart = patientChartMapper.findById(id);
+
+        CreateResponse createResponse = new CreateResponse();
+        BeanUtils.copyProperties(patientChart CreateResponse);
+        return createResponse;
     }
 
     @PostMapping("/patientcharts")

@@ -22,6 +22,7 @@ public class UpdateRequest {
     }
 
     public String getMedicalhistory(){
+
         return medicalhistory;
     }
 }

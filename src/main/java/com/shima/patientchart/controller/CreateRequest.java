@@ -13,14 +13,17 @@ public class CreateRequest {//Postmanからrequestを受け取るコード
     }
 
     public String getAddress() {
+
         return address;
     }
 
     public String getInsuranCecard() {
+
         return insuranCecard;
     }
 
     public String getMedicalHistory() {
+
         return medicalHistory;
     }
 }

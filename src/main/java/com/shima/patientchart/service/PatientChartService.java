@@ -24,6 +24,10 @@ public class PatientChartService {
 
         return patientcharts;//患者カルテを返All
     }
+    public Optional<PatientChart> findByIdPatient(){
+        Optional<PatientChart> patientCharts = patientchartMapper.findById();
+        return patientCharts;
+    }
 
     public PatientChart findPatientChart(int id) throws UserNotFoundException {
         Optional<PatientChart> PatientChart = this.PatientChartMapper.findById();//IDによる検索オプション
