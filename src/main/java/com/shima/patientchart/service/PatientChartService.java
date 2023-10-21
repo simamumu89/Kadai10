@@ -23,12 +23,12 @@ public class PatientChartService {
         return patientcharts;//患者カルテを返All
     }
     public Optional<PatientChart> findByIdPatientChart(int id){
-        Optional<PatientChart> patientCharts = patientchartMapper.findById();
-        return patientCharts;
+        Optional<PatientChart> patientCharts = patientchartMapper.findById(id);
+        return patientCharts;// 指定したIDを返す
     }
 
     public PatientChart findPatientChart(int id) throws UserNotFoundException {
-        Optional<PatientChart> PatientChart = this.patientchartMapper.findById();//IDによる検索オプション
+        Optional<PatientChart> PatientChart = this.patientchartMapper.findById(id);//IDによる検索オプション
         if (PatientChart.isPresent()) {//もし患者チャートが存在する場合
             return PatientChart.get();
         } else {//それ以外

@@ -14,5 +14,5 @@ public interface PatientChartMapper {
     List<PatientChart> findAll();
 
     @Select("SELECT * FROM patientcharts WHERE id = #{id}")//患者カルテ選択からどこでID
-    Optional<PatientChart> findById();
+    Optional<PatientChart> findById(int id);
 }
