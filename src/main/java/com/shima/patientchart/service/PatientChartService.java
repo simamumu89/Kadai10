@@ -12,11 +12,9 @@ import java.util.Optional;
 public class PatientChartService {
 
     private PatientChartMapper patientchartMapper;
-    private PatientChartMapper PatientChartMapper;
 
-    public PatientChartService(com.shima.patientchart.mapper.PatientChartMapper patientchartMapper, com.shima.patientchart.mapper.PatientChartMapper patientChartMapper) {
+    public PatientChartService(PatientChartMapper patientchartMapper) {
         this.patientchartMapper = patientchartMapper;
-        PatientChartMapper = patientChartMapper;
     }
 
     public List<PatientChart> findAllPatientChart() {//患者チャート ID の検索　　返り値の型
@@ -24,13 +22,13 @@ public class PatientChartService {
 
         return patientcharts;//患者カルテを返All
     }
-    public Optional<PatientChart> findByIdPatient(){
+    public Optional<PatientChart> findByIdPatientChart(int id){
         Optional<PatientChart> patientCharts = patientchartMapper.findById();
         return patientCharts;
     }
 
     public PatientChart findPatientChart(int id) throws UserNotFoundException {
-        Optional<PatientChart> PatientChart = this.PatientChartMapper.findById();//IDによる検索オプション
+        Optional<PatientChart> PatientChart = this.patientchartMapper.findById();//IDによる検索オプション
         if (PatientChart.isPresent()) {//もし患者チャートが存在する場合
             return PatientChart.get();
         } else {//それ以外

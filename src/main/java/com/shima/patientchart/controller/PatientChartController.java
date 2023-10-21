@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/PatientCharts")
 public class PatientChartController {
 
     private final PatientChartService patientchartService;
@@ -48,18 +47,6 @@ public class PatientChartController {
     @GetMapping("/patientcharts/{id}")
     public PatientChart getPatientChart(@PathVariable("id") int id) throws UserNotFoundException {
         return patientchartService.findPatientChart(id);//例外ハンドリング
-    }
-
-    @Autowired
-    PatientChartMapper patientChartMapper;
-
-    @GetMapping("/{id}")
-    public CreateResponse findById(@PathVariable int id){
-        Optional<PatientChart> patientChart = patientChartMapper.findById(id);
-
-        CreateResponse createResponse = new CreateResponse();
-        BeanUtils.copyProperties(patientChart CreateResponse);
-        return createResponse;
     }
 
     @PostMapping("/patientcharts")
