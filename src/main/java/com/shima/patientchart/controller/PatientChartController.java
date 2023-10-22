@@ -2,11 +2,8 @@ package com.shima.patientchart.controller;
 
 import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
-import com.shima.patientchart.mapper.PatientChartMapper;
 import com.shima.patientchart.service.PatientChartService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +13,6 @@ import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 public class PatientChartController {
@@ -28,7 +24,7 @@ public class PatientChartController {
     }
 
     @ExceptionHandler(value = UserNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleUserNotFoundException(
+    public ResponseEntity<Map<String, String>> handleUserNotFoundException(// UserNotFoundException を処理する
             UserNotFoundException e, HttpServletRequest request) {
         Map<String, String> body = Map.of(
                 "timestamp", ZonedDateTime.now().toString(),
@@ -53,7 +49,7 @@ public class PatientChartController {
     public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
         URI uri = uriComponentsBuilder.path("/patientcharts/{id}").buildAndExpand(1).toUri();
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
-    }//Postmanからrequestを受け取る
+    }//PostmanからRequestを受け取る
 
     @PatchMapping("/patientcharts/{id}")
     public UpdateResponse updateName(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {

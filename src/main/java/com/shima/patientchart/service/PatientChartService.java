@@ -11,26 +11,26 @@ import java.util.Optional;
 @Service
 public class PatientChartService {
 
-    private PatientChartMapper patientchartMapper;
+    private final PatientChartMapper patientchartMapper;
 
     public PatientChartService(PatientChartMapper patientchartMapper) {
         this.patientchartMapper = patientchartMapper;
     }
 
     public List<PatientChart> findAllPatientChart() {//患者チャート ID の検索　　返り値の型
-        List<PatientChart> patientcharts = patientchartMapper.findAll();//患者チャートのリストを患者チャートマッパをすべてを見つける
+        List<PatientChart> patientCharts = patientchartMapper.findAll();//患者チャートのリストを患者チャートマッパをすべてを見つける
 
-        return patientcharts;//患者カルテを返All
+        return patientCharts;//患者カルテを返All
     }
     public Optional<PatientChart> findByIdPatientChart(int id){
         Optional<PatientChart> patientCharts = patientchartMapper.findById(id);
-        return patientCharts;// 指定したIDを返す
+        return patientCharts;//指定したIDを返す
     }
 
     public PatientChart findPatientChart(int id) throws UserNotFoundException {
-        Optional<PatientChart> PatientChart = this.patientchartMapper.findById(id);//IDによる検索オプション
-        if (PatientChart.isPresent()) {//もし患者チャートが存在する場合
-            return PatientChart.get();
+        Optional<PatientChart> patientChart = this.patientchartMapper.findById(id);//IDによる検索オプション
+        if (patientChart.isPresent()) {//もし患者チャートが存在する場合
+            return patientChart.get();
         } else {//それ以外
             throw new UserNotFoundException("user not found");//ユーザーが見つかりませんとUserNotFoundExceptionをスローする
         }
