@@ -9,10 +9,6 @@ public class CreateResponse {
         this.message = message;
     }
 
-    public CreateResponse() {
-
-    }
-
     public String getMessage() {
 
         return message;

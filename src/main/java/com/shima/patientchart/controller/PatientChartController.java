@@ -35,23 +35,23 @@ public class PatientChartController {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }//404エラーを返す
 
-    @GetMapping("/patientcharts")
+    @GetMapping("/patient-charts")
     public List<PatientChart> getAllPatientChart() {
         return patientchartService.findAllPatientChart();// Serviceの返り値を受け取る変数の型
     }//Get 取得処理
 
-    @GetMapping("/patientcharts/{id}")
+    @GetMapping("/patient-charts/{id}")
     public PatientChart getPatientChart(@PathVariable("id") int id) throws UserNotFoundException {
         return patientchartService.findPatientChart(id);//例外ハンドリング
     }
 
-    @PostMapping("/patientcharts")
+    @PostMapping("/patient-charts")
     public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
         URI uri = uriComponentsBuilder.path("/patientcharts/{id}").buildAndExpand(1).toUri();
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
     }//PostmanからRequestを受け取る
 
-    @PatchMapping("/patientcharts/{id}")
+    @PatchMapping("/patient-charts/{id}")
     public UpdateResponse updateName(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {
         //Postmanから更新を処理する
         return new UpdateResponse("a name is updated!");
