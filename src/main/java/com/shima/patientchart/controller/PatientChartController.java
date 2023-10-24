@@ -42,7 +42,7 @@ public class PatientChartController {
 
     @GetMapping("/patient-charts/{id}")
     public PatientChart getPatientChart(@PathVariable("id") int id) throws UserNotFoundException {
-        return patientchartService.findPatientChart(id);//例外ハンドリング
+        return patientchartService.findById(id);//例外ハンドリング
     }
 
     @PostMapping("/patient-charts")
