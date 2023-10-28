@@ -23,8 +23,14 @@ public class PatientChartService {
         return patientCharts;//患者カルテを返All
     }
     public PatientChart findById(int id) throws UserNotFoundException {
-        return patientchartMapper.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Patient information not found"));
-    }//指定したIDを返す
+        return patientchartMapper.findById(id)//指定したIDを返す　
+                .orElseThrow(() -> new UserNotFoundException("Patient information not found")); // @ExceptionHandlerに繋げて例外処理
+    }
+    //Post(登録処理）
+    public PatientChart insert(String address, String insurancecard, String medicalhistory){
+        PatientChart patientChart = new PatientChart(null, address, insurancecard, medicalhistory);//コンストラクターと繋がる
+        patientchartMapper.insert(patientChart);
+        return patientChart;
+    }
 
 }

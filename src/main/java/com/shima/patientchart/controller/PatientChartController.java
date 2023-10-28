@@ -38,7 +38,7 @@ public class PatientChartController {
     @GetMapping("/patient-charts")
     public List<PatientChart> getAllPatientChart() {
         return patientchartService.findAllPatientChart();// Serviceの返り値を受け取る変数の型
-    }//Get 取得処理
+    }//Get 取得処理                 //関数
 
     @GetMapping("/patient-charts/{id}")
     public PatientChart getPatientChart(@PathVariable("id") int id) throws UserNotFoundException {

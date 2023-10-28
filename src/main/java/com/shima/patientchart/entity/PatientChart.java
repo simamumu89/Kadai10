@@ -2,7 +2,7 @@ package com.shima.patientchart.entity;
 
 import com.shima.patientchart.service.PatientChartService;
 
-public class PatientChart {
+public class PatientChart {//Entity
 
     private int id;
     private String name;
@@ -11,6 +11,14 @@ public class PatientChart {
     private String insurancecard;
     private String medicalhistory;
 
+    public PatientChart(int id, String name, String gender, String address, String insurancecard, String medicalhistory) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.address = address;
+        this.insurancecard = insurancecard;
+        this.medicalhistory = medicalhistory;
+    }
 
     public int getId() {
 
