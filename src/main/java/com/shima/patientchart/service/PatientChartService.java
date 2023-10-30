@@ -14,6 +14,7 @@ public class PatientChartService {
     private final PatientChartMapper patientchartMapper;
 
     public PatientChartService(PatientChartMapper patientchartMapper) {
+
         this.patientchartMapper = patientchartMapper;
     }
 

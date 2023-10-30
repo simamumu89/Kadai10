@@ -12,10 +12,10 @@ import java.util.Optional;
 @Mapper
 public interface PatientChartMapper {
 
-    @Select("SELECT * FROM patient-charts")
+    @Select("SELECT * FROM patientcharts")
     List<PatientChart> findAll();
 
-    @Select("SELECT * FROM patient-charts WHERE id = #{id}")//患者カルテ選択からどこでID
+    @Select("SELECT * FROM patientcharts WHERE id = #{id}")//患者カルテ選択からどこでID
     Optional<PatientChart> findById(int id);
 
     @Insert("INSERT INTO patient-charts (address, insurancecard, medicalhistory) VALUES (#{address}, #{insurancecard}, #{medicalhistory}")

@@ -11,6 +11,12 @@ public class PatientChart {//Entity
     private String insurancecard;
     private String medicalhistory;
 
+    public PatientChart(String address, String insurancecard, String medicalhistory) {
+        this.address = address;
+        this.insurancecard = insurancecard;
+        this.medicalhistory = medicalhistory;
+    }
+
     public PatientChart(int id, String name, String gender, String address, String insurancecard, String medicalhistory) {
         this.id = id;
         this.name = name;
@@ -20,33 +26,30 @@ public class PatientChart {//Entity
         this.medicalhistory = medicalhistory;
     }
 
-    public int getId() {
+    public PatientChart(Object o, String address, String insurancecard, String medicalhistory) {
+    }
 
+    public int getId() {
         return id;
     }
 
     public String getName() {
-
         return name;
     }
 
     public String getGender() {
-
         return gender;
     }
 
     public String getAddress() {
-
         return address;
     }
 
     public String getInsurancecard() {
-
         return insurancecard;
     }
 
     public String getMedicalhistory() {
-
         return medicalhistory;
     }
 }
