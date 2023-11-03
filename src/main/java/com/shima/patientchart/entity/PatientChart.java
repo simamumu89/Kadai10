@@ -11,7 +11,7 @@ public class PatientChart {//Entity
     private String insurancecard;
     private String medicalhistory;
 
-    public PatientChart(String address, String insurancecard, String medicalhistory) {
+    public PatientChart(Object id, String address, String insurancecard, String medicalhistory) {
         this.address = address;
         this.insurancecard = insurancecard;
         this.medicalhistory = medicalhistory;
@@ -24,9 +24,6 @@ public class PatientChart {//Entity
         this.address = address;
         this.insurancecard = insurancecard;
         this.medicalhistory = medicalhistory;
-    }
-
-    public PatientChart(Object o, String address, String insurancecard, String medicalhistory) {
     }
 
     public int getId() {
