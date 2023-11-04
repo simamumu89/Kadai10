@@ -18,7 +18,7 @@ public interface PatientChartMapper {
     @Select("SELECT * FROM patientcharts WHERE id = #{id}")//患者カルテ選択からどこでID
     Optional<PatientChart> findById(int id);
 
-    @Insert("INSERT INTO patientcharts (address, insurancecard, medicalhistory) VALUES (#{address}, #{insurancecard}, #{medicalhistory}")
+    @Insert("INSERT INTO patientcharts (name, gender, address, insurancecard, medicalhistory) VALUES (#{name},#{gender},#{address}, #{insurancecard}, #{medicalhistory}")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(PatientChart patientChart);
 }

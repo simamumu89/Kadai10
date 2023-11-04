@@ -11,14 +11,7 @@ public class PatientChart {//Entity
     private String insurancecard;
     private String medicalhistory;
 
-    public PatientChart(Object id, String address, String insurancecard, String medicalhistory) {
-        this.address = address;
-        this.insurancecard = insurancecard;
-        this.medicalhistory = medicalhistory;
-    }
-
-    public PatientChart(int id, String name, String gender, String address, String insurancecard, String medicalhistory) {
-        this.id = id;
+    public PatientChart(String name, String gender, String address, String insurancecard, String medicalhistory) {
         this.name = name;
         this.gender = gender;
         this.address = address;

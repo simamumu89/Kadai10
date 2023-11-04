@@ -47,7 +47,7 @@ public class PatientChartController {
 
     @PostMapping("/patient-charts")
     public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
-        URI uri = uriComponentsBuilder.path("/patientcharts/{id}").buildAndExpand(1).toUri();
+        URI uri = uriComponentsBuilder.path("/patient-charts/{id}").buildAndExpand(1).toUri();
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
     }//PostmanからRequestを受け取る
 

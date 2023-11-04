@@ -28,7 +28,7 @@ public class PatientChartService {
                 .orElseThrow(() -> new UserNotFoundException("Patient information not found")); // @ExceptionHandlerに繋げて例外処理
     }
     //Post(登録処理）
-    public PatientChart insert(String address, String insurancecard, String medicalhistory){
+    public PatientChart insert(String name, String gender, String address, String insurancecard, String medicalhistory){
         PatientChart patientChart = new PatientChart(null, address, insurancecard, medicalhistory);//コンストラクターと繋がる
         patientchartMapper.insert(patientChart);
         return patientChart;
