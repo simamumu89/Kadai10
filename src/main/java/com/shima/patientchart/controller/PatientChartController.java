@@ -47,9 +47,10 @@ public class PatientChartController {
 
     @PostMapping("/patient-charts")
     public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
+        PatientChart patientChart = patientchartService.insert(createRequest.getName(),createRequest.getGender(),createRequest.getAddress(),createRequest.getInsurancecard(),createRequest.getMedicalhistory());
         URI uri = uriComponentsBuilder.path("/patient-charts/{id}").buildAndExpand(1).toUri();
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
-    }//PostmanからRequestを受け取る
+    }//PostmanからCreateRequestを受け取る
 
     @PatchMapping("/patient-charts/{id}")
     public UpdateResponse updateName(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {

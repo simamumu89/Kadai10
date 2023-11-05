@@ -1,29 +1,37 @@
 package com.shima.patientchart.controller;
 
 public class CreateRequest {//Postmanからrequestを受け取るコード
-
+    private String name;
+    private String gender;
     private String address;
-    private String insuranCecard;
-    private String medicalHistory;
+    private String insurancecard;
+    private String medicalhistory;
 
-    public CreateRequest(String address, String insurancecard, String medicalhistory) {
+    public CreateRequest(String name, String gender, String address, String insurancecard, String medicalhistory) {
+        this.name = name;
+        this.gender = gender;
         this.address = address;
-        this.insuranCecard = insurancecard;
-        this.medicalHistory = medicalhistory;
+        this.insurancecard = insurancecard;
+        this.medicalhistory = medicalhistory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     public String getAddress() {
-
         return address;
     }
 
-    public String getInsuranCecard() {
-
-        return insuranCecard;
+    public String getInsurancecard() {
+        return insurancecard;
     }
 
-    public String getMedicalHistory() {
-
-        return medicalHistory;
+    public String getMedicalhistory() {
+        return medicalhistory;
     }
 }
