@@ -29,8 +29,14 @@ public class PatientChartService {
     }
     //Post(登録処理）
     public PatientChart insert(String name, String gender, String address, String insurancecard, String medicalhistory){
-        PatientChart patientChart = new PatientChart(name, gender, address, insurancecard, medicalhistory);//コンストラクターと繋がる
+        PatientChart patientChart = new PatientChart(name, gender, address, insurancecard, medicalhistory);//PatientChartのEntity(コンストラクタ）
         patientchartMapper.insert(patientChart);
+        return patientChart;
+    }
+
+    public PatientChart update(String address, String insurancecard, String medicalhistory){
+        PatientChart patientChart = new PatientChart(address, insurancecard, medicalhistory);
+        patientchartMapper.update(patientChart);
         return patientChart;
     }
 

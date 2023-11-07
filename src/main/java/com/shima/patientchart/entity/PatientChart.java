@@ -19,15 +19,24 @@ public class PatientChart {//Entity
         this.medicalhistory = medicalhistory;
     }
 
+    public PatientChart(String address, String insurancecard, String medicalhistory) {
+        this.address = address;
+        this.insurancecard = insurancecard;
+        this.medicalhistory = medicalhistory;
+    }
+
     public int getId() {
+
         return id;
     }
 
     public String getName() {
+
         return name;
     }
 
     public String getGender() {
+
         return gender;
     }
 
@@ -36,10 +45,12 @@ public class PatientChart {//Entity
     }
 
     public String getInsurancecard() {
+
         return insurancecard;
     }
 
     public String getMedicalhistory() {
+
         return medicalhistory;
     }
 }
