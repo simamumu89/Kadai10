@@ -1,6 +1,7 @@
 package com.shima.patientchart.controller;
 
-public class CreateRequest {//Postmanからrequestを受け取るコード
+public class CreateRequest {
+    //Postmanからrequestを受け取るコード
     private String name;
     private String gender;
     private String address;

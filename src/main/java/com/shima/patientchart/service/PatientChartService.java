@@ -21,7 +21,7 @@ public class PatientChartService {
     public List<PatientChart> findAllPatientChart() {//患者チャート ID の検索　　返り値の型
         List<PatientChart> patientCharts = patientchartMapper.findAll();//患者チャートのリストを患者チャートマッパをすべてを見つける
 
-        return patientCharts;//患者カルテを返All
+        return patientCharts;//患者カルテをすべて返す
     }
     public PatientChart findById(int id) throws UserNotFoundException {
         return patientchartMapper.findById(id)//指定したIDを返す　

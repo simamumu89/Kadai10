@@ -19,8 +19,8 @@ public class PatientChartController {
 
     private final PatientChartService patientchartService;
 
-    public PatientChartController(PatientChartService patientChartService) {
-        this.patientchartService = patientChartService;
+    public PatientChartController(PatientChartService patientchartService) {
+        this.patientchartService = patientchartService;
     }
 
     @ExceptionHandler(value = UserNotFoundException.class)
@@ -35,30 +35,37 @@ public class PatientChartController {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }//404エラーを返す
 
+    //GETの実装
+    //全件取得の実装
     @GetMapping("/patient-charts")
     public List<PatientChart> getAllPatientChart() {
         return patientchartService.findAllPatientChart();// Serviceの返り値を受け取る変数の型
-    }//Get 取得処理                 //関数
+    }
 
+    //ID検索でデータ取得と例外処理
     @GetMapping("/patient-charts/{id}")
     public PatientChart getPatientChart(@PathVariable("id") int id) throws UserNotFoundException {
         return patientchartService.findById(id);//例外ハンドリング
     }
 
+    //POST
+    //新規登録(ID追加）　PostmanからCreateRequestを受け取る
     @PostMapping("/patient-charts")
-    public ResponseEntity<CreateResponse> createName(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<CreateResponse> createPatientChart(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
         PatientChart patientChart = patientchartService.insert(createRequest.getName(),createRequest.getGender(),createRequest.getAddress(),createRequest.getInsurancecard(),createRequest.getMedicalhistory());
         URI uri = uriComponentsBuilder.path("/patient-charts/{id}").buildAndExpand(1).toUri();
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
-    }//PostmanからCreateRequestを受け取る
-
-    @PatchMapping("/patient-charts/{id}")
-    public UpdateResponse updateName(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {
-        //Postmanから更新を処理する
-        return new UpdateResponse("a name is updated!");
     }
 
-    @DeleteMapping("/patientcharts/{id}")
+    //Postmanから更新を処理する
+    @PatchMapping("/patient-charts/{id}")
+    public ResponseEntity<UpdateResponse> updatePatientChart(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {
+        patientchartService.update(updateRequest.getAddress(),updateRequest.getInsurancecard(),updateRequest.getMedicalhistory());
+        UpdateResponse updateResponse = new UpdateResponse("Contents have been updated!!");
+        return ResponseEntity.ok(UpdateResponse);
+    }
+
+    @DeleteMapping("/patient-charts/{id}")
     public DeleteResponse deleteName(@PathVariable int id) {
         //更新データの削除処理
         return new DeleteResponse("a name is removed!");

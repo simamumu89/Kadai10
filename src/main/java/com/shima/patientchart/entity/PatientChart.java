@@ -1,7 +1,5 @@
 package com.shima.patientchart.entity;
 
-import com.shima.patientchart.service.PatientChartService;
-
 public class PatientChart {//Entity
 
     private int id;
