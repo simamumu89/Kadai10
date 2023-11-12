@@ -9,6 +9,7 @@ public class PatientChart {//Entity
     private String insurancecard;
     private String medicalhistory;
 
+    //Post(新規登録処理）のConstructor
     public PatientChart(String name, String gender, String address, String insurancecard, String medicalhistory) {
         this.name = name;
         this.gender = gender;
@@ -17,7 +18,9 @@ public class PatientChart {//Entity
         this.medicalhistory = medicalhistory;
     }
 
-    public PatientChart(String address, String insurancecard, String medicalhistory) {
+    //PATCH(既存DBの更新)のUpdateResponseのConstructor
+    public PatientChart(int id, String address, String insurancecard, String medicalhistory) {
+        this.id = id;
         this.address = address;
         this.insurancecard = insurancecard;
         this.medicalhistory = medicalhistory;

@@ -1,7 +1,12 @@
 package com.shima.patientchart.controller;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UpdateRequest {
+    @NotNull
     private String address;
+
+    @NotNull
     private String insurancecard;
     private String medicalhistory;
 
@@ -12,17 +17,14 @@ public class UpdateRequest {
     }
 
     public String getAddress() {
-
         return address;
     }
 
     public String getInsurancecard() {
-
         return insurancecard;
     }
 
-    public String getMedicalhistory(){
-
+    public String getMedicalhistory() {
         return medicalhistory;
     }
 }

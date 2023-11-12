@@ -13,10 +13,7 @@ public class PatientUpdateForm {
         this.medicalhistory = medicalhistory;
     }
 
-    public PatientChart convertToPatientChart(int id){
-        PatientChart patientChart = new PatientChart(this.address, this.insurancecard, this.medicalhistory);
-        return PatientChart;
-    }
+
     public String getAddress() {
         return address;
     }

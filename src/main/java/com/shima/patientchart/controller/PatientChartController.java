@@ -4,8 +4,10 @@ import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.service.PatientChartService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -23,8 +25,9 @@ public class PatientChartController {
         this.patientchartService = patientchartService;
     }
 
+    //GET 指定したIDが存在しない場合
     @ExceptionHandler(value = UserNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleUserNotFoundException(// UserNotFoundException を処理する
+    public ResponseEntity<Map<String, String>> handleUserNotFoundException(
             UserNotFoundException e, HttpServletRequest request) {
         Map<String, String> body = Map.of(
                 "timestamp", ZonedDateTime.now().toString(),
@@ -33,6 +36,25 @@ public class PatientChartController {
                 "message", e.getMessage(),
                 "path", request.getRequestURI());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }//404エラーを返す
+
+
+    //POST 指定したIDが存在しない場合
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(
+            UserNotFoundException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", ZonedDateTime.now().toString(),
+                "status", String.valueOf(HttpStatus.BAD_REQUEST.value()),
+                "error", HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "message", e.getBindingResult().getAllErrors().stream().map(err -> {
+                    if (err instanceof FieldError) {
+                        return String.format("%s: %s", ((FieldError) err).getField(), err.getDefaultMessage());
+                    }
+                    return err.toString();
+                }).collect(Collectors.joining(", "));
+        "path", request.getRequestURI());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }//404エラーを返す
 
     //GETの実装
@@ -51,18 +73,18 @@ public class PatientChartController {
     //POST
     //新規登録(ID追加）　PostmanからCreateRequestを受け取る
     @PostMapping("/patient-charts")
-    public ResponseEntity<CreateResponse> createPatientChart(@RequestBody CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
-        PatientChart patientChart = patientchartService.insert(createRequest.getName(),createRequest.getGender(),createRequest.getAddress(),createRequest.getInsurancecard(),createRequest.getMedicalhistory());
-        URI uri = uriComponentsBuilder.path("/patient-charts/{id}").buildAndExpand(1).toUri();
+    public ResponseEntity<CreateResponse> createPatientChart(@RequestBody @Valid CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
+        PatientChart patientChart = patientchartService.insert(createRequest.getName(), createRequest.getGender(), createRequest.getAddress(), createRequest.getInsurancecard(), createRequest.getMedicalhistory());
+        URI uri = uriComponentsBuilder.path("/patient-charts/{id}").buildAndExpand(patientChart.getId()).toUri();
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
     }
 
     //Postmanから更新を処理する
     @PatchMapping("/patient-charts/{id}")
     public ResponseEntity<UpdateResponse> updatePatientChart(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {
-        patientchartService.update(updateRequest.getAddress(),updateRequest.getInsurancecard(),updateRequest.getMedicalhistory());
+        patientchartService.update(id, updateRequest.getAddress(), updateRequest.getInsurancecard(), updateRequest.getMedicalhistory());
         UpdateResponse updateResponse = new UpdateResponse("Contents have been updated!!");
-        return ResponseEntity.ok(UpdateResponse);
+        return ResponseEntity.ok(updateResponse);
     }
 
     @DeleteMapping("/patient-charts/{id}")
