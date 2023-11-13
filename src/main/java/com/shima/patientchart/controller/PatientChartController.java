@@ -1,5 +1,6 @@
 package com.shima.patientchart.controller;
 
+import com.shima.patientchart.UserAlreadyExistsException;
 import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.service.PatientChartService;
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -15,6 +17,7 @@ import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class PatientChartController {
@@ -38,11 +41,23 @@ public class PatientChartController {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }//404エラーを返す
 
+    @ExceptionHandler(value = UserAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(
+            UserAlreadyExistsException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", ZonedDateTime.now().toString(),
+                "status", String.valueOf(HttpStatus.CONFLICT.value()),
+                "error", HttpStatus.CONFLICT.getReasonPhrase(),
+                "message", e.getMessage(),
+                "path", request.getRequestURI());
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }//409 エラー
+
 
     //POST 指定したIDが存在しない場合
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(
-            UserNotFoundException e, HttpServletRequest request) {
+            MethodArgumentNotValidException e, HttpServletRequest request) {
         Map<String, String> body = Map.of(
                 "timestamp", ZonedDateTime.now().toString(),
                 "status", String.valueOf(HttpStatus.BAD_REQUEST.value()),
@@ -52,10 +67,10 @@ public class PatientChartController {
                         return String.format("%s: %s", ((FieldError) err).getField(), err.getDefaultMessage());
                     }
                     return err.toString();
-                }).collect(Collectors.joining(", "));
-        "path", request.getRequestURI());
+                }).collect(Collectors.joining(", ")),
+                "path", request.getRequestURI());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    }//404エラーを返す
+    }//400エラーを返す
 
     //GETの実装
     //全件取得の実装

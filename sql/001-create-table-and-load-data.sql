@@ -4,7 +4,7 @@ CREATE TABLE patientcharts (
  id int unsigned AUTO_INCREMENT,
  name VARCHAR(20) NOT NULL,
  gender VARCHAR(20) NOT NULL,
- address VARCHAR(20) NOT NULL,
+ address VARCHAR(20) NOT NULL UNIQUE,
  insurancecard VARCHAR(20) NOT NULL,
  medicalhistory VARCHAR(20) NOT NULL,
  PRIMARY KEY(id)

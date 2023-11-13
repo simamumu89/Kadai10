@@ -1,11 +1,13 @@
 package com.shima.patientchart.service;
 
+import com.shima.patientchart.UserAlreadyExistsException;
 import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.mapper.PatientChartMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientChartService {
@@ -27,7 +29,11 @@ public class PatientChartService {
 
     //Post(新規追加登録処理）
     public PatientChart insert(String name, String gender, String address, String insurancecard, String medicalhistory) {
-        PatientChart patientChart = new PatientChart(name, gender, address, insurancecard, medicalhistory);//PatientChartのEntity(コンストラクタ）
+        Optional<PatientChart> patientChartOptional = this.patientchartMapper.findByAddress(address);
+        if (patientChartOptional.isPresent()) {
+            throw new UserAlreadyExistsException("address : +address + already exists");
+        }
+        PatientChart patientChart = new PatientChart(name, gender, address, insurancecard, medicalhistory);
         patientchartMapper.insert(patientChart);
         return patientChart;
     }
