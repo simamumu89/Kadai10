@@ -18,9 +18,14 @@ public interface PatientChartMapper {
 //患者カルテ選択からどこでID
     Optional<PatientChart> findById(int id);
 
-    //POST バリデーション
+    //POST バリデーション1
     @Select("SELECT * FROM patientcharts WHERE address = #{address}")
     Optional<PatientChart> findByAddress(String address);
+
+    //POST バリデーション2
+    @Select("SELECT * FROM patientcharts WHERE name = #{name}")
+    Optional<PatientChart> findByName(String name);
+
 
     //POST処理(既存DBの情報更新）
     @Insert("INSERT INTO patientcharts (name, gender, address, insurancecard, medicalhistory) VALUES (#{name},#{gender},#{address}, #{insurancecard}, #{medicalhistory})")

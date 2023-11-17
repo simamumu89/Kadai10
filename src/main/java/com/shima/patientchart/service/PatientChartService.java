@@ -29,9 +29,11 @@ public class PatientChartService {
 
     //Post(新規追加登録処理）
     public PatientChart insert(String name, String gender, String address, String insurancecard, String medicalhistory) {
-        Optional<PatientChart> patientChartOptional = this.patientchartMapper.findByAddress(address);
+        Optional<PatientChart> patientChartOptional =
+                this.patientchartMapper.findByAddress(address);
+        this.patientchartMapper.findByName(name);
         if (patientChartOptional.isPresent()) {
-            throw new UserAlreadyExistsException("address : +address + already exists");
+            throw new UserAlreadyExistsException("Already registered data");
         }
         PatientChart patientChart = new PatientChart(name, gender, address, insurancecard, medicalhistory);
         patientchartMapper.insert(patientChart);
