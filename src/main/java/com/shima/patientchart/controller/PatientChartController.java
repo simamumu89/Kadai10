@@ -1,6 +1,7 @@
 package com.shima.patientchart.controller;
 
-import com.shima.patientchart.UserAlreadyExistsException;
+import com.shima.patientchart.AddressAlreadyExistsException;
+import com.shima.patientchart.NameAlreadyExistsException;
 import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.service.PatientChartService;
@@ -41,18 +42,6 @@ public class PatientChartController {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }//404エラーを返す
 
-    @ExceptionHandler(value = UserAlreadyExistsException.class)
-    public ResponseEntity<Map<String, String>> handleUserAlreadyExistsException(
-            UserAlreadyExistsException e, HttpServletRequest request) {
-        Map<String, String> body = Map.of(
-                "timestamp", ZonedDateTime.now().toString(),
-                "status", String.valueOf(HttpStatus.CONFLICT.value()),
-                "error", HttpStatus.CONFLICT.getReasonPhrase(),
-                "message", e.getMessage(),
-                "path", request.getRequestURI());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
-    }//409 エラー
-
 
     //POST 指定したIDが存在しない場合
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -71,6 +60,34 @@ public class PatientChartController {
                 "path", request.getRequestURI());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }//400エラーを返す
+
+
+    // Addressが既に登録されている場合
+    @ExceptionHandler(value = AddressAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleAddressAlreadyExistsException(
+            AddressAlreadyExistsException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", ZonedDateTime.now().toString(),
+                "status", String.valueOf(HttpStatus.CONFLICT.value()),
+                "error", HttpStatus.CONFLICT.getReasonPhrase(),
+                "message", e.getMessage(),
+                "path", request.getRequestURI());
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }//409 エラー
+
+
+    @ExceptionHandler(value = NameAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleNameAlreadyExistsException(
+            NameAlreadyExistsException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", ZonedDateTime.now().toString(),
+                "status", String.valueOf(HttpStatus.CONFLICT.value()),
+                "error", HttpStatus.CONFLICT.getReasonPhrase(),
+                "message", e.getMessage(),
+                "path", request.getRequestURI());
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }//409 エラー
+
 
     //GETの実装
     //全件取得の実装

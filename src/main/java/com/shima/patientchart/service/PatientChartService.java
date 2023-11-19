@@ -1,6 +1,7 @@
 package com.shima.patientchart.service;
 
-import com.shima.patientchart.UserAlreadyExistsException;
+import com.shima.patientchart.AddressAlreadyExistsException;
+import com.shima.patientchart.NameAlreadyExistsException;
 import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
 import com.shima.patientchart.mapper.PatientChartMapper;
@@ -33,7 +34,8 @@ public class PatientChartService {
                 this.patientchartMapper.findByAddress(address);
         this.patientchartMapper.findByName(name);
         if (patientChartOptional.isPresent()) {
-            throw new UserAlreadyExistsException("Already registered data");
+            throw new AddressAlreadyExistsException("Already registered data");
+            throw new NameAlreadyExistsException("Already registered data");
         }
         PatientChart patientChart = new PatientChart(name, gender, address, insurancecard, medicalhistory);
         patientchartMapper.insert(patientChart);
