@@ -76,6 +76,7 @@ public class PatientChartController {
     }//409 エラー
 
 
+    // Nameが既に登録されている場合
     @ExceptionHandler(value = NameAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleNameAlreadyExistsException(
             NameAlreadyExistsException e, HttpServletRequest request) {
