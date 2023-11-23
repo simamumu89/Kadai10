@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotNull;
 
 //PostmanからRequestを受け取るコード
 public class CreateRequest {
-
     @NotNull
     private String name;
     private String gender;

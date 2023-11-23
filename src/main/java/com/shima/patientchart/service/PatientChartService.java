@@ -39,10 +39,15 @@ public class PatientChartService {
         if (isNamePresent) {
             throw new NameAlreadyExistsException("Already registered data");
         }
-
-        //PATCH(
-        public void update ( int id, String address, String insurancecard, String medicalhistory){
-            PatientChart patientChart = new PatientChart(id, address, insurancecard, medicalhistory);
-            patientchartMapper.update(patientChart);
-        }
+        PatientChart patientChart = new PatientChart(name, gender, address, insurancecard, medicalhistory);
+        patientchartMapper.insert(patientChart);
+        return patientChart;
     }
+
+    //PATCH(
+    public void update(int id, String address, String insurancecard, String medicalhistory) {
+        PatientChart patientChart = new PatientChart(id, address, insurancecard, medicalhistory);
+        patientchartMapper.update(patientChart);
+    }
+
+}
