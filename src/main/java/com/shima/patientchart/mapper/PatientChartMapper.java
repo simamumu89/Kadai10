@@ -15,24 +15,30 @@ public interface PatientChartMapper {
 
     //GET　指定したid
     @Select("SELECT * FROM patientcharts WHERE id = #{id}")
-//患者カルテ選択からどこでID
+    //患者カルテ選択からどこでID
     Optional<PatientChart> findById(int id);
 
-    //POST バリデーション1
-    @Select("SELECT * FROM patientcharts WHERE address = #{address}")
-    Optional<PatientChart> findByAddress(String address);
 
-    //POST バリデーション2
-    @Select("SELECT * FROM patientcharts WHERE name = #{name}")
-    Optional<PatientChart> findByName(String name);
-
-
-    //POST処理(既存DBの情報更新）
+    //POST処理 (新規追加登録処理)
     @Insert("INSERT INTO patientcharts (name, gender, address, insurancecard, medicalhistory) VALUES (#{name},#{gender},#{address}, #{insurancecard}, #{medicalhistory})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(PatientChart patientChart);
 
+    //POST バリデーション1　Address
+    @Select("SELECT * FROM patientcharts WHERE address = #{address}")
+    Optional<PatientChart> findByAddress(String address);
+
+    //POST バリデーション2 Name
+    @Select("SELECT * FROM patientcharts WHERE name = #{name}")
+    Optional<PatientChart> findByName(String name);
+
+    @Select("SELECT * FROM patientcharts WHERE address = #{address} AND id != #{id}")
+    Optional<PatientChart> findByAddressExcept(String address, int id);
+
+
+    //PATCH (既存DBの部分更新）
     @Update("UPDATE patientcharts SET address = #{address}, insurancecard = #{insurancecard}, medicalhistory = #{medicalhistory} WHERE id = #{id}")
     void update(PatientChart patientChart);
+
 }
 

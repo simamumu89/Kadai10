@@ -43,7 +43,7 @@ public class PatientChartController {
     }//404エラーを返す
 
 
-    //POST 指定したIDが存在しない場合
+    //POST 既存DBに登録されている情報のValidation
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e, HttpServletRequest request) {
@@ -114,7 +114,7 @@ public class PatientChartController {
 
     //Postmanから更新を処理する
     @PatchMapping("/patient-charts/{id}")
-    public ResponseEntity<UpdateResponse> updatePatientChart(@PathVariable int id, @RequestBody UpdateRequest updateRequest) {
+    public ResponseEntity<UpdateResponse> updatePatientChart(@PathVariable int id, @RequestBody @Valid UpdateRequest updateRequest) {
         patientchartService.update(id, updateRequest.getAddress(), updateRequest.getInsurancecard(), updateRequest.getMedicalhistory());
         UpdateResponse updateResponse = new UpdateResponse("Contents have been updated!!");
         return ResponseEntity.ok(updateResponse);

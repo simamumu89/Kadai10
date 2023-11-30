@@ -44,8 +44,15 @@ public class PatientChartService {
         return patientChart;
     }
 
-    //PATCH(
+    //PATCH(既存DBの部分更新）
     public void update(int id, String address, String insurancecard, String medicalhistory) {
+        patientchartMapper.findById(id)//指定したIDを返す　
+                .orElseThrow(() -> new UserNotFoundException("Patient information not found"));
+        // addressがすでに存在するかどうかのチェック
+        boolean isAddressPresent = this.patientchartMapper.findByAddressExcept(address, id).isPresent();
+        if (isAddressPresent) {
+            throw new AddressAlreadyExistsException("Already registered data");
+        }
         PatientChart patientChart = new PatientChart(id, address, insurancecard, medicalhistory);
         patientchartMapper.update(patientChart);
     }
