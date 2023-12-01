@@ -1,7 +1,11 @@
 package com.shima.patientchart.mapper;
 
 import com.shima.patientchart.entity.PatientChart;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +19,6 @@ public interface PatientChartMapper {
 
     //GET　指定したid
     @Select("SELECT * FROM patientcharts WHERE id = #{id}")
-    //患者カルテ選択からどこでID
     Optional<PatientChart> findById(int id);
 
 
@@ -32,13 +35,14 @@ public interface PatientChartMapper {
     @Select("SELECT * FROM patientcharts WHERE name = #{name}")
     Optional<PatientChart> findByName(String name);
 
-    @Select("SELECT * FROM patientcharts WHERE address = #{address} AND id != #{id}")
-    Optional<PatientChart> findByAddressExcept(String address, int id);
-
 
     //PATCH (既存DBの部分更新）
     @Update("UPDATE patientcharts SET address = #{address}, insurancecard = #{insurancecard}, medicalhistory = #{medicalhistory} WHERE id = #{id}")
     void update(PatientChart patientChart);
+
+    //PATCH Address
+    @Select("SELECT * FROM patientcharts WHERE address = #{address} AND id != #{id}")
+    Optional<PatientChart> findByAddressExceptId(String address, int id);
 
 }
 

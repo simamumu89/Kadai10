@@ -1,6 +1,6 @@
 package com.shima.patientchart;
 
-public class AddressAlreadyExistsException extends RuntimeException {//11
+public class AddressAlreadyExistsException extends RuntimeException {
 
     public AddressAlreadyExistsException(String message) {
         super(message);

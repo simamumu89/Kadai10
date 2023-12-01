@@ -25,8 +25,8 @@ public class PatientChartController {
 
     private final PatientChartService patientchartService;
 
-    public PatientChartController(PatientChartService patientchartService) {
-        this.patientchartService = patientchartService;
+    public PatientChartController(PatientChartService patientChartService) {
+        this.patientchartService = patientChartService;
     }
 
     //GET 指定したIDが存在しない場合
@@ -94,7 +94,7 @@ public class PatientChartController {
     //全件取得の実装
     @GetMapping("/patient-charts")
     public List<PatientChart> getAllPatientChart() {
-        return patientchartService.findAllPatientChart();// Serviceの返り値を受け取る変数の型
+        return patientchartService.findAllPatientChart();
     }
 
     //ID検索でデータ取得と例外処理

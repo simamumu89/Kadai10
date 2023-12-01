@@ -2,15 +2,13 @@ package com.shima.patientchart.controller;
 
 import jakarta.validation.constraints.NotNull;
 
-//PostmanからRequestを受け取るコード
+//リクエストボディのJsonに対応するJavaのオブジェクト
 public class CreateRequest {
     @NotNull
     private String name;
     private String gender;
-
     @NotNull
     private String address;
-
     private String insurancecard;
     private String medicalhistory;
 

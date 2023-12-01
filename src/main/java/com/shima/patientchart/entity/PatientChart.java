@@ -4,9 +4,7 @@ public class PatientChart {//Entity
 
     private int id;
     private String name;
-
     private String gender;
-
     private String address;
     private String insurancecard;
     private String medicalhistory;
