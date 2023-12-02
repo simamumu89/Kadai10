@@ -1,6 +1,7 @@
 package com.shima.patientchart.mapper;
 
 import com.shima.patientchart.entity.PatientChart;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -44,5 +45,8 @@ public interface PatientChartMapper {
     @Select("SELECT * FROM patientcharts WHERE address = #{address} AND id != #{id}")
     Optional<PatientChart> findByAddressExceptId(String address, int id);
 
+    //DELETE(指定したidを削除）
+    @Delete("DELETE FROM patientcharts WHERE id =#{id}")
+    void delete(int id);
 }
 

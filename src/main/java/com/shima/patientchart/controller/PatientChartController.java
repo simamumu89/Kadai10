@@ -11,7 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -90,21 +97,22 @@ public class PatientChartController {
     }//400 エラー
 
 
-    //GETの実装
-    //全件取得の実装
+    //GET
+    //全件取得
     @GetMapping("/patient-charts")
     public List<PatientChart> getAllPatientChart() {
         return patientchartService.findAllPatientChart();
     }
 
-    //ID検索でデータ取得と例外処理
+    //GET
+    //idで指定したデータ取得と例外処理
     @GetMapping("/patient-charts/{id}")
     public PatientChart getPatientChart(@PathVariable("id") int id) throws UserNotFoundException {
         return patientchartService.findById(id);//例外ハンドリング
     }
 
-    //POST
-    //新規登録(ID追加）　PostmanからCreateRequestを受け取る
+    //POST (Create)
+    //新規登録(ID追加）　Validation追加
     @PostMapping("/patient-charts")
     public ResponseEntity<CreateResponse> createPatientChart(@RequestBody @Valid CreateRequest createRequest, UriComponentsBuilder uriComponentsBuilder) {
         PatientChart patientChart = patientchartService.insert(createRequest.getName(), createRequest.getGender(), createRequest.getAddress(), createRequest.getInsurancecard(), createRequest.getMedicalhistory());
@@ -112,7 +120,8 @@ public class PatientChartController {
         return ResponseEntity.created(uri).body(new CreateResponse("create a new patient chart"));
     }
 
-    //Postmanから更新を処理する
+    //PATCH (Update)
+    //既存DBの情報を更新　Validation追加
     @PatchMapping("/patient-charts/{id}")
     public ResponseEntity<UpdateResponse> updatePatientChart(@PathVariable int id, @RequestBody @Valid UpdateRequest updateRequest) {
         patientchartService.update(id, updateRequest.getAddress(), updateRequest.getInsurancecard(), updateRequest.getMedicalhistory());
@@ -120,9 +129,12 @@ public class PatientChartController {
         return ResponseEntity.ok(updateResponse);
     }
 
+    //Delete
+    //idで指定した情報削除
     @DeleteMapping("/patient-charts/{id}")
-    public DeleteResponse deleteName(@PathVariable int id) {
-        //更新データの削除処理
-        return new DeleteResponse("a name is removed!");
+    public ResponseEntity<DeleteResponse> deletePatientChart(@PathVariable int id) {
+        patientchartService.delete(id);
+        DeleteResponse deleteResponse = new DeleteResponse("Patient information deleted");
+        return ResponseEntity.ok(deleteResponse);
     }
 }

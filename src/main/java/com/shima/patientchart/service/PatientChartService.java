@@ -57,4 +57,11 @@ public class PatientChartService {
         patientChartMapper.update(patientChart);
     }
 
+    //DELETE(指定したid削除）
+    public void delete(int id) {
+        patientChartMapper.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Patient information not found"));
+        patientChartMapper.delete(id);
+    }
+
 }
