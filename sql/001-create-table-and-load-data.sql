@@ -18,3 +18,4 @@ INSERT INTO patientcharts (id,name,gender,address,insurancecard,medicalhistory)
 VALUES (3, "広瀬", "女性", "東京", "健保", "胃癌");
 INSERT INTO patientcharts (id,name,gender,address,insurancecard,medicalhistory)
 VALUES (4, "松本", "女性", "京都", "共済", "骨盤骨折");
+
