@@ -1,4 +1,4 @@
-package com.shima.patientchart;
+package com.shima.patientchart.exception;
 
 public class UserNotFoundException extends RuntimeException {//投げる幅を広げる
 

@@ -1,9 +1,9 @@
 package com.shima.patientchart.controller;
 
-import com.shima.patientchart.AddressAlreadyExistsException;
-import com.shima.patientchart.NameAlreadyExistsException;
-import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
+import com.shima.patientchart.exception.AddressAlreadyExistsException;
+import com.shima.patientchart.exception.NameAlreadyExistsException;
+import com.shima.patientchart.exception.UserNotFoundException;
 import com.shima.patientchart.service.PatientChartService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;

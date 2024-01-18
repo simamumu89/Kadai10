@@ -1,9 +1,9 @@
 package com.shima.patientchart.service;
 
-import com.shima.patientchart.AddressAlreadyExistsException;
-import com.shima.patientchart.NameAlreadyExistsException;
-import com.shima.patientchart.UserNotFoundException;
 import com.shima.patientchart.entity.PatientChart;
+import com.shima.patientchart.exception.AddressAlreadyExistsException;
+import com.shima.patientchart.exception.NameAlreadyExistsException;
+import com.shima.patientchart.exception.UserNotFoundException;
 import com.shima.patientchart.mapper.PatientChartMapper;
 import org.springframework.stereotype.Service;
 
